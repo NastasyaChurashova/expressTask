@@ -1,0 +1,18 @@
+{
+  "name": "express_task",
+  "version": "1.0.0",
+  "description": "http_server_express",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "express",
+    "http_server"
+  ],
+  "author": "Nastasya Churashova",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
