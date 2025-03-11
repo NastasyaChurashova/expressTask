@@ -20,6 +20,14 @@ const loadViews = () => {
 
 const countViews = loadViews();
 
+const saveViews = (views) => {
+	try {
+		fs.writeFileSync(viewsFile, JSON.stringify(views, null, 2));
+	} catch (error) {
+		console.error("Ошибка при сохранении просмотров:", error);
+	}
+};
+
 const updateViews = (route) => {
 	if (!countViews[route]) {
 		countViews[route] = 0;
