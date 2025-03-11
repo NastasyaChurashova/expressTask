@@ -13,17 +13,36 @@ const loadViews = () => {
 			return JSON.parse(data);
 		}
 	} catch (error) {
-		console.error("Ошибка при сохранении данных просмотров:", error);
+		console.error("Ошибка при загрузке просмотров:", error);
 	}
+	return { "/": 0, "/about": 0 };
 };
 
 const countViews = loadViews();
 
+const updateViews = (route) => {
+	if (!countViews[route]) {
+		countViews[route] = 0;
+	}
+	countViews[route] += 1;
+	saveViews(countViews);
+};
+
 app.get("/", (req, res) => {
-	res.send("<h1>Это главная страница</h1>");
+	updateViews("/");
+	res.send(`
+        <h1>Корневая страница</h1>
+        <p>Просмотров: ${countViews["/"]}</p>
+        <a href="/about">Ссылка на страницу /about</a>
+    `);
 });
 app.get("/about", (req, res) => {
-	res.send("<h1>Это страница обо мне</h1>");
+	updateViews("/about");
+	res.send(`
+        <h1>Страница About</h1>
+        <p>Просмотров: ${countViews["/about"]}</p>
+        <a href="/">Ссылка на главную страницу</a>
+    `);
 });
 
 app.listen(port, () => {
